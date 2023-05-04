@@ -5,12 +5,11 @@ import (
 	"net"
 	"log"
 	"io"
-        "github.com/Schniipi/is105sem03/mycrypt"
 )
 
 func main() {
 	var wg sync.WaitGroup
-	proxyServer, err := net.Listen("tcp", "172.17.0.3:8080")
+	proxyServer, err := net.Listen("tcp", "172.17.0.4:8080")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -27,7 +26,7 @@ func main() {
 			go func(client net.Conn) {
 				defer client.Close()
 
-				server, err := net.Dial("tcp", "172.17.0.4:8080")
+				server, err := net.Dial("tcp", "172.17.0.3:8080")
                 if err != nil {
 					log.Println(err)
 					return
